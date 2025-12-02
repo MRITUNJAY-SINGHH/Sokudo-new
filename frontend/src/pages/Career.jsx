@@ -64,17 +64,35 @@ const Career = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-gray-800">
-      {/* TOP BANNER */}
-      <section
-        className="relative isolate h-[420px] flex justify-center items-center text-white"
+    <div
+         className='min-h-screen bg-white text-gray-800'
+         style={{
+            backgroundImage: `
+        repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(75, 85, 99, 0.08) 20px, rgba(75, 85, 99, 0.08) 21px),
+        repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(107, 114, 128, 0.06) 30px, rgba(107, 114, 128, 0.06) 31px),
+        repeating-linear-gradient(60deg, transparent, transparent 40px, rgba(55, 65, 81, 0.05) 40px, rgba(55, 65, 81, 0.05) 41px),
+        repeating-linear-gradient(150deg, transparent, transparent 35px, rgba(31, 41, 55, 0.04) 35px, rgba(31, 41, 55, 0.04) 36px)
+      `,
+         }}
+      >
+         {/* Top Banner */}
+          <section
+        className="relative isolate h-[420px] flex flex-col justify-center items-center text-center transition-all duration-300"
         style={{
-          backgroundImage: `url(${Banner})`,
-          backgroundSize: "cover",
+          marginTop: "calc(var(--announcement-offset) ",
         }}
       >
-        <h1 className="heading">Career</h1>
-      </section>
+               <div
+                 className="absolute inset-0 -z-10 bg-center bg-cover"
+                 style={{ backgroundImage: `url(${Banner})` }}
+               />
+               <div className="absolute inset-0 -z-10 bg-black/40" />
+               <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.20),transparent_40%),radial-gradient(ellipse_at_bottom_left,rgba(255,255,255,0.12),transparent_40%)]" />
+       
+               <div className="page-width mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                 <h1 className="heading !text-white">Career</h1>
+               </div>
+             </section>
 
       {/* FORM */}
       <section className="max-w-4xl mx-auto px-4 py-14">
