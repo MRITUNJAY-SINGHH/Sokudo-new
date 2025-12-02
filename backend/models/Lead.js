@@ -1,0 +1,15 @@
+import mongoose from 'mongoose';
+
+const leadSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true, trim: true },
+    phone: { type: String, required: true, trim: true },
+    pincode: { type: String, required: true, trim: true },
+    productInterested: { type: String, required: true },
+  },
+  { timestamps: true }
+);
+
+const Lead = mongoose.model('Lead', leadSchema);
+
+export default Lead;
