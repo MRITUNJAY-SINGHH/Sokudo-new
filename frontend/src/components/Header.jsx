@@ -208,9 +208,9 @@ const Header = () => {
             {/* DESKTOP — Test Ride | Book Now */}
             <div className="hidden lg:flex items-center gap-3 text-[#ffffff] font-normal">
               <NavLink
-                to="/"
-                state={{ scrollTo: "test-ride" }} // 
-                className="hover:text-yellow-500"
+                to="/test-ride"
+                
+                className="btn !py-[8px]"
               >
                 Test Ride
               </NavLink>
@@ -353,7 +353,7 @@ const Header = () => {
             <div className="px-2 pt-4 flex flex-col gap-3">
               {/* TEST RIDE Mobile */}
               <NavLink
-                to="/our-model"
+                to="/test-ride"
                 className="w-full inline-flex justify-center px-4 py-2 text-[13px] rounded-md bg-[#FFB200] text-white font-medium"
               >
                 TEST RIDE

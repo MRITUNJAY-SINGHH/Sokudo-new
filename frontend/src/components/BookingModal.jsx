@@ -4,6 +4,7 @@ import { IoClose } from "react-icons/io5";
 import toast from "react-hot-toast";
 import axios from "axios";
 
+
 /* ---------------- CITY OPTIONS ---------------- */
 const CITY_OPTIONS = [
   { value: "delhi", label: "Delhi" },
@@ -22,25 +23,22 @@ const CITY_OPTIONS = [
 ];
 
 const BookingModal = ({ isOpen, onClose, formData, onSuccess }) => {
-  const products = useSelector((state) => state.product?.items || []);
-  const { isLoggedIn, token } = useSelector((state) => state.user);
+
+  /* ✅ DIRECT PRODUCT SLICE */
+  const products = useSelector((state) => state.product.items || []);
 
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedModelId, setSelectedModelId] = useState("");
   const [loading, setLoading] = useState(false);
 
   /* ---------------- SELECTED PRODUCT ---------------- */
-  const selectedProduct = useMemo(() => {
-    return products.find((p) => p._id === selectedModelId);
-  }, [products, selectedModelId]);
+  const selectedProduct = useMemo(
+    () => products.find((p) => p._id === selectedModelId),
+    [products, selectedModelId]
+  );
 
   /* ---------------- BOOKING HANDLER ---------------- */
   const handleConfirmBooking = async () => {
-    if (!isLoggedIn || !token) {
-      toast.error("Please login to continue");
-      return;
-    }
-
     if (!selectedProduct) {
       toast.error("Please select a scooter model");
       return;
@@ -58,6 +56,7 @@ const BookingModal = ({ isOpen, onClose, formData, onSuccess }) => {
         `${import.meta.env.VITE_API_URL}/test-ride/book`,
         {
           name: formData?.name,
+          email:formData?.email,
           phone: formData?.phone,
           pincode: formData?.pincode,
           date: formData?.date,
@@ -67,15 +66,11 @@ const BookingModal = ({ isOpen, onClose, formData, onSuccess }) => {
             CITY_OPTIONS.find((c) => c.value === selectedCity)?.label || "",
           modelId: selectedProduct._id,
           modelName: selectedProduct.name,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
         }
+        // ✅ NO AUTH HEADER
       );
 
-      toast.success("Test Ride booked successfully ✅");
+      
 
       if (onSuccess) onSuccess();
 
@@ -96,80 +91,52 @@ const BookingModal = ({ isOpen, onClose, formData, onSuccess }) => {
   if (!isOpen) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-50 bg-black/50 flex justify-center items-center p-4"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="booking-modal-title"
-      aria-busy={loading}
-    >
+    <div className="fixed inset-0 z-50 bg-black/50 flex justify-center items-center p-4">
       <div className="bg-white w-full max-w-md rounded-xl shadow-lg">
+
         {/* HEADER */}
         <div className="flex justify-between items-center px-5 py-4 border-b">
-          <h3
-            id="booking-modal-title"
-            className="font-semibold text-lg"
-          >
-            Confirm Test Ride
-          </h3>
-          <button
-            onClick={onClose}
-            aria-label="Close booking modal"
-            type="button"
-          >
-            <IoClose size={18} aria-hidden="true" />
+          <h3 className="font-semibold text-lg">Confirm Test Ride</h3>
+          <button onClick={onClose}>
+            <IoClose size={18} />
           </button>
         </div>
 
         {/* BODY */}
         <div className="p-5 space-y-4">
-          {/* MODEL SELECT */}
-          <div>
-            <label htmlFor="model-select" className="sr-only">
-              Select scooter model
-            </label>
-            <select
-              id="model-select"
-              className="input"
-              value={selectedModelId}
-              onChange={(e) => setSelectedModelId(e.target.value)}
-            >
-              <option value="">Select Scooter Model</option>
-              {products.map((p) => (
-                <option key={p._id} value={p._id}>
-                  {p.name}
-                </option>
-              ))}
-            </select>
-          </div>
 
-          {/* CITY SELECT */}
-          <div>
-            <label htmlFor="city-select" className="sr-only">
-              Select city
-            </label>
-            <select
-              id="city-select"
-              className="input"
-              value={selectedCity}
-              onChange={(e) => setSelectedCity(e.target.value)}
-            >
-              <option value="">Select City</option>
-              {CITY_OPTIONS.map((c) => (
-                <option key={c.value} value={c.value}>
-                  {c.label}
-                </option>
-              ))}
-            </select>
-          </div>
+          {/* MODEL */}
+          <select
+            className="input"
+            value={selectedModelId}
+            onChange={(e) => setSelectedModelId(e.target.value)}
+          >
+            <option value="">Select Scooter Model</option>
+            {products.map((p) => (
+              <option key={p._id} value={p._id}>
+                {p.name}
+              </option>
+            ))}
+          </select>
 
-          {/* CONFIRM BUTTON */}
+          {/* CITY */}
+          <select
+            className="input"
+            value={selectedCity}
+            onChange={(e) => setSelectedCity(e.target.value)}
+          >
+            <option value="">Select City</option>
+            {CITY_OPTIONS.map((c) => (
+              <option key={c.value} value={c.value}>
+                {c.label}
+              </option>
+            ))}
+          </select>
+
+          {/* BUTTON */}
           <button
-            type="button"
             onClick={handleConfirmBooking}
             disabled={loading || !selectedCity || !selectedModelId}
-            aria-disabled={loading || !selectedCity || !selectedModelId}
-            aria-label="Confirm test ride booking"
             className={`btn w-full py-2 ${
               loading || !selectedCity || !selectedModelId
                 ? "opacity-60 cursor-not-allowed"

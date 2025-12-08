@@ -21,7 +21,7 @@ import Signup from './signup/Signup.jsx';
 import AuthSuccess from './signup/AuthSuccess.jsx';
 import BlogDetails from './pages/BlogDetails.jsx';
 import Account from './pages/Account.jsx';
-// import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 import TermsConditions from './pages/TermsAndCondition.jsx';
 import Disclaimer from './pages/Disclaimer.jsx';
 import Warranty from './pages/Warrenty.jsx';
@@ -35,6 +35,9 @@ import PressReleases from './pages/PressRelease.jsx';
 import SokudoVariantPage from './components/Variant.jsx';
 import FeatureSections from './components/Variant.jsx';
 import { FaWhatsapp } from "react-icons/fa";
+import TestRidePage from './pages/TestRide.jsx';
+import ThankYouPage from './pages/ThnakyouPage.jsx';
+import NotFoundPage from './pages/NotFoundPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -63,6 +66,7 @@ const router = createBrowserRouter([
       path: '/reset',
       element: <CreatePassword />,
    },
+   { path: '/thankyou', element: <ThankYouPage /> },
 
    {
       path: '/',
@@ -80,7 +84,7 @@ const router = createBrowserRouter([
          { path: 'r&d', element: <RnD /> },
          { path: 'our-model', element: <OurModals /> },
          { path: 'career', element: <Career /> },
-         // { path: 'privacy-policy', element: <PrivacyPolicy /> },
+         { path: 'privacy-policy', element: <PrivacyPolicy /> },
          { path: 'terms-conditions', element: <TermsConditions /> },
          { path: 'disclaimer', element: <Disclaimer /> },
          { path: 'warranty', element: <Warranty /> },
@@ -90,6 +94,8 @@ const router = createBrowserRouter([
          { path: 'location', element: <Locations /> },
          { path: 'news', element: <PressReleases /> },
          { path: 'variants', element: <FeatureSections /> },
+         { path: 'test-ride', element: <TestRidePage /> },
+         
          {
             path: '/instagram-testimonials',
             element: <InstagramTestimonials />,
@@ -100,7 +106,7 @@ const router = createBrowserRouter([
          { path: 'product/:id', element: <ProductDetail /> },
          { path: 'blog/:id', element: <BlogDetails /> },
          { path: 'login', element: <LoginForm /> },
-         { path: '*', element: <div>Not Found</div> },
+         { path: '*', element: <NotFoundPage/> },
       ],
    },
 ]);

@@ -30,9 +30,9 @@ const PrivacyPolicy = () => {
 
           {/* Heading Below Banner */}
           <div className="text-center mb-10">
-            <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900 mb-2">
+            <h1 className="text-3xl sm:text-4xl font-semibold text-gray-900 mb-2">
               Privacy Policies
-            </h2>
+            </h1>
             <div className="h-[3px] w-24 bg-yellow-400 mx-auto rounded-full"></div>
           </div>
 
@@ -48,16 +48,16 @@ const PrivacyPolicy = () => {
               as well as how we safeguard it. We never sell or rent your personal information to third parties.
             </p>
 
-            <p className="font-semibold">Personal data that Sokudo's website uses -</p>
+            <h2 className="font-semibold">Personal data that Sokudo's website uses -</h2>
 
-            <p className="font-semibold">Comments</p>
+            <h2 className="font-semibold">Comments</h2>
             <p>
               When spectators post comments on the site, we collect the information displayed in 
               the comments form as well as the visitor's IP address and browser user agent string 
               to aid in spam detection.
             </p>
 
-            <p className="font-semibold">Analytics</p>
+            <h2 className="font-semibold">Analytics</h2>
             <p>
               For analytics, we use Google Analytics. This information generally includes where you have 
               been, how you can use our website and any communication services between your computer and 
@@ -65,13 +65,13 @@ const PrivacyPolicy = () => {
               operating system, and browser type, among other things.
             </p>
 
-            <p className="font-semibold">Media</p>
+            <h2 className="font-semibold">Media</h2>
             <p>
               If you transfer pictures to the website, you must avoid including embedded location information 
               (EXIF GPS). Website visitors can access and extract any location information from the website's images.
             </p>
 
-            <p className="font-semibold">Contact forms</p>
+            <h2 className="font-semibold">Contact forms</h2>
             <p>
               If you use the contact form on Sokudo, we only capture the data you enter. If you enter your name, 
               email address, or other personal information in the form, that data is sent to us via email. 
@@ -82,7 +82,7 @@ const PrivacyPolicy = () => {
               about the reason you contacted us. We never sell contact form information to a third party for any reason.
             </p>
 
-            <p className="font-semibold">How long will we keep your data?</p>
+            <h2 className="font-semibold">How long will we keep your data?</h2>
             <p>
               When you leave a comment, it and its metadata are saved indefinitely. This allows us to automatically 
               recognise and authorise any follow-up comments rather than retaining them in a moderation queue.

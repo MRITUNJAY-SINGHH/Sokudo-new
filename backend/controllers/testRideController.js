@@ -7,6 +7,7 @@ export const createTestRide = async (req, res) => {
   try {
     const {
       name,
+      email,
       phone,
       pincode,
       date,
@@ -19,6 +20,7 @@ export const createTestRide = async (req, res) => {
 
     if (
       !name ||
+      !email ||
       !phone ||
       !pincode ||
       !date ||
@@ -35,8 +37,9 @@ export const createTestRide = async (req, res) => {
     }
 
     const testRide = await TestRide.create({
-      customer: req.user._id, // from protect middleware
+      customer: req.user?._id || null, // from protect middleware
       name,
+      email,
       phone,
       pincode,
       date,

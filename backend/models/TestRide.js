@@ -6,10 +6,11 @@ const testRideSchema = new mongoose.Schema(
     customer: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Customer",
-      required: true,
+      required: false,
     },
 
     name: { type: String, required: true },
+    email: { type: String, required: true },
     phone: { type: String, required: true },
     pincode: { type: String, required: true },
     date: { type: String, required: true },

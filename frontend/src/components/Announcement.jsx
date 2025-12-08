@@ -50,7 +50,7 @@ const Announcement = ({ visible, setVisible }) => {
                Introducing SOKUDO the future of motorcycling. Starts at an 
                introductory price of ₹89,889.
                <a
-                  href='#book'
+                  href='/our-model'
                   className='text-[#FFB200] underline font-medium ml-1'
                >
                   Book Yours Today

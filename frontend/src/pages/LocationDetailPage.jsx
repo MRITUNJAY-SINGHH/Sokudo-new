@@ -74,9 +74,17 @@ const Locations = () => {
         </h2>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {visibleShowrooms.map((item, index) => (
+          {visibleShowrooms.map((item, index) => {
+             const showroomImage =
+              item.image ||
+              item.Image ||
+              item["Showroom Image"] ||
+              item["img"] ||
+              item["Image Path"] ||
+              "/news/ss.png";
+               return(
             <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow flex flex-col">
-              <div className="h-44 md:h-48 w-full bg-cover bg-center" style={{ backgroundImage: "url('/news/ss.png')" }} />
+              <div className="h-44 md:h-48 w-full bg-cover bg-center" style={{ backgroundImage: `url('${showroomImage}')`  }} />
               <div className="p-5 flex flex-col flex-1">
                 <h3 className="text-lg font-semibold text-gray-900 mb-1">{item["Showroom (GMB)"]}</h3>
                 <p className="text-gray-700 text-sm mb-1">📍 {item["Showroom Location"]}</p>
@@ -91,7 +99,7 @@ const Locations = () => {
                 </a>
               </div>
             </div>
-          ))}
+          )})}
         </div>
 
         {/* Read More Button */}

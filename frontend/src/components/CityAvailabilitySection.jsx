@@ -2,12 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const cities = [
-  { name: "Delhi NCR", img: "/delhi.webp" },
-  { name: "UP", img: "/up.webp" },
-  { name: "Haryana", img: "/haryana.webp" },
-  { name: "Rajasthan", img: "/raj.webp" },
-  { name: "Bihar", img: "/pune.jpg" },
-  { name: "Kolkata", img: "/kolkata.webp" },
+  { name: "Shahadra", img: "/loc/l1.webp" },
+  { name: "Uttam Nagar", img: "/loc/l2.webp" },
+  { name: "Mohan Nagar", img: "/loc/l3.webp" },
+  { name: "Bhajanpura", img: "/loc/l5.webp" },
+  { name: "Greater-Noida", img: "/pune.jpg" },
+  { name: "Narela", img: "/kolkata.webp" },
 ];
 
 const CityAvailability = () => {

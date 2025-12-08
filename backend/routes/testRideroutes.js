@@ -9,7 +9,7 @@ import { protect } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 // Simple booking – NO payment
-router.post("/book", protect, createTestRide);
+router.post("/book", createTestRide);
 
 // Logged-in user's test rides
 router.get("/my-test-rides", protect, getMyTestRides);

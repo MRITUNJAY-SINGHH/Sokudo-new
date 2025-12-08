@@ -9,6 +9,7 @@ import { MdOutlineLocationOn } from "react-icons/md";
 import { RiBatteryChargeLine } from "react-icons/ri";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import SmartChoiceSection from '../components/SmartChoice';
+import { useNavigate } from 'react-router-dom';
 
 /* Options */
 const qualificationOptions = [
@@ -50,12 +51,19 @@ const Dealership = () => {
    const [isSubmitting, setIsSubmitting] = useState(false);
    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
+   const navigate= useNavigate();
+
    const onSubmit = async (data) => {
       try {
          setIsSubmitting(true);
          const response = await submitDealershipForm(data);
          toast.success(response.message || 'Application submitted!');
          reset();
+          navigate("/thankyou", {
+      state: {
+        formType: "Dealership",
+        message: `Your Application has been submitted. Our team will contact you shortly.`,
+      },});
       } catch (error) {
          toast.error(error.response?.data?.message || 'Submission failed!');
       } finally {

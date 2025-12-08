@@ -7,6 +7,7 @@ const StoreBookingSection = () => {
 
   const initialFormState = {
     name: "",
+    email: "",
     phone: "",
     pincode: "",
     date: "",
@@ -96,6 +97,22 @@ const StoreBookingSection = () => {
                   />
                 </div>
 
+
+                 <div className="flex flex-col gap-1">
+    <label htmlFor="email" className="text-xs font-medium text-gray-600">
+      Email Address
+    </label>
+    <input
+      id="email"
+      name="email"
+      placeholder="Email"
+      type="email"
+      value={formData.email}
+      onChange={handleChange}
+      className="px-4 py-3 rounded-full border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400r"
+    />
+  </div>
+
                 {/* Phone */}
                 <div className="flex flex-col gap-1">
                   <label
@@ -155,7 +172,7 @@ const StoreBookingSection = () => {
                 </div>
 
                 {/* Time */}
-                <div className="flex flex-col gap-1 sm:col-span-2">
+                <div className="flex flex-col gap-1 ">
                   <label
                     htmlFor="time"
                     className="text-xs font-medium text-gray-600"

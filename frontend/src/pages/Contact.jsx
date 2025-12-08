@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { submitContactForm } from '../features/services/Services';
 import LocationFinder from '../components/LocationFinder';
+import { useNavigate } from 'react-router-dom';
 
 const Contact = () => {
    const [isSubmitting, setIsSubmitting] = useState(false);
@@ -14,14 +15,21 @@ const Contact = () => {
       reset,
       formState: { errors },
    } = useForm();
+   const navigate=useNavigate();
 
    const onSubmit = async (data) => {
       try {
          setIsSubmitting(true);
          const response = await submitContactForm(data);
+      
 
          toast.success(response.message || 'Message sent successfully!');
          reset();
+          navigate("/thankyou", {
+      state: {
+        formType: "Test Ride",
+        message: `Your test ride  has been booked successfully. Our team will contact you shortly.`,
+      },});
       } catch (error) {
          console.error('Contact form error:', error);
          if (error.response?.status === 429) {
