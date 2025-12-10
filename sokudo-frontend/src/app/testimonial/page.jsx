@@ -1,5 +1,6 @@
+
 import React from "react";
-import Banner from "/bb2.webp";
+
 
 const Testimonial = () => {
   return (
@@ -13,7 +14,7 @@ const Testimonial = () => {
       >
         <div
           className="absolute inset-0 -z-10 bg-center bg-cover"
-          style={{ backgroundImage: `url(${Banner})` }}
+          style={{ backgroundImage: 'url("/bb2.webp")' }}
         />
         <div className="absolute inset-0 -z-10 bg-black/50" />
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.20),transparent_40%),radial-gradient(ellipse_at_bottom_left,rgba(255,255,255,0.12),transparent_40%)]" />

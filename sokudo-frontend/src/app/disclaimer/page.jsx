@@ -1,10 +1,9 @@
-import Banner from "/videoimage.jpg";
 
 const Disclaimer = () => {
   return (
     <div className="min-h-screen bg-white text-gray-800">
 
-      {/* ✅ Banner Section */}
+      {/*  Banner Section */}
        <section
         className="relative isolate h-[420px] flex flex-col justify-center items-center text-center transition-all duration-300"
         style={{
@@ -13,7 +12,7 @@ const Disclaimer = () => {
       >
             <div
               className="absolute inset-0 -z-10 bg-center bg-cover"
-              style={{ backgroundImage: `url(${Banner})` }}
+              style={{ backgroundImage: 'url("/videoimage.jpg")' }}
             />
             <div className="absolute inset-0 -z-10 bg-black/40" />
             <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.20),transparent_40%),radial-gradient(ellipse_at_bottom_left,rgba(255,255,255,0.12),transparent_40%)]" />
@@ -23,7 +22,7 @@ const Disclaimer = () => {
             </div>
           </section>
 
-      {/* ✅ Content Section */}
+      {/*  Content Section */}
       <section className="py-12 sm:py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 

@@ -1,5 +1,4 @@
-import Banner from "/career.webp";
-import About from "/p4.webp";
+
 import { GiMaterialsScience } from "react-icons/gi";
 import { MdElectricalServices } from "react-icons/md";
 import { HiShieldCheck } from "react-icons/hi";
@@ -19,7 +18,7 @@ const RnD = () => {
       >
         <div
           className="absolute inset-0 -z-10 bg-center bg-cover"
-          style={{ backgroundImage: `url(${Banner})` }}
+          style={{ backgroundImage: 'url("/career.webp")' }}
         />
         <div className="absolute inset-0 -z-10 bg-black/40" />
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.20),transparent_40%),radial-gradient(ellipse_at_bottom_left,rgba(255,255,255,0.12),transparent_40%)]" />
@@ -36,7 +35,7 @@ const RnD = () => {
           <div className="lg:col-span-5">
             <div className="relative overflow-hidden rounded-2xl ring-1 ring-gray-200">
               <img
-                src={About}
+                src="/p4.webp"
                 alt="R&D at Sokudo India"
                 className="w-full h-full object-cover aspect-[4/3] sm:aspect-[16/10]"
               />

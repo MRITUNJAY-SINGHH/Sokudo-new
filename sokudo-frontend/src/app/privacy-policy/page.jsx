@@ -1,4 +1,3 @@
-import Banner from "/videoimage.jpg";
 
 const PrivacyPolicy = () => {
   return (
@@ -13,7 +12,7 @@ const PrivacyPolicy = () => {
       >
         <div
           className="absolute inset-0 -z-10 bg-center bg-cover"
-          style={{ backgroundImage: `url(${Banner})` }}
+          style={{ backgroundImage: 'url("/videoimage.jpg")' }}
         />
         <div className="absolute inset-0 -z-10 bg-black/40" />
 

@@ -1,6 +1,8 @@
+"use client";
+
 import { useMemo, useState, useEffect } from "react";
-import Banner from "/bb3.webp";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
+
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllBlogs } from "../features/blogs/BlogSlice";
 
@@ -36,7 +38,10 @@ const BlogSkeleton = () => (
 
 const Blog = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const router = useRouter();
+
+
+
 
   const {
     items: blogs = [],
@@ -114,7 +119,7 @@ const Blog = () => {
       >
              <div
                className="absolute inset-0 -z-10 bg-center bg-cover"
-               style={{ backgroundImage: `url(${Banner})` }}
+               style={{ backgroundImage: 'url("/bb3.webp")' }}
              />
              <div className="absolute inset-0 -z-10 bg-black/40" />
              <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.20),transparent_40%),radial-gradient(ellipse_at_bottom_left,rgba(255,255,255,0.12),transparent_40%)]" />
@@ -252,7 +257,7 @@ const Blog = () => {
 
                         <div className="mt-auto pt-4">
                           <button
-                            onClick={() => navigate(`/blog/${slugify(featured.title)}`)}
+                            onClick={() => router.push(`/blog/${slugify(featured.title)}`)}
                             className="btn inline-flex justify-center items-center px-5 py-2.5 text-sm font-semibold rounded-xl bg-[#ffb200] hover:bg-black text-white transition"
                           >
                             Read More
@@ -284,7 +289,7 @@ const Blog = () => {
                         />
 
                         <button
-                          onClick={() => navigate(`/blog/${slugify(b.title)}`)}
+                          onClick={() => router.push(`/blog/${slugify(b.title)}`)}
                           className=" btn mt-4 inline-flex text-sm font-medium text-[#ffb200] hover:text-black"
                         >
                           Read More 

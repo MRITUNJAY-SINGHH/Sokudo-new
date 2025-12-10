@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FiExternalLink } from "react-icons/fi";
-import BannerVideo from "/acutevid.mp4"; 
-import Banner from "/press1.webp";
+
 
 export default function PressReleases() {
   const [popupImage, setPopupImage] = useState(null);
@@ -69,7 +68,7 @@ const pressImages = Array.from(
       >
             <div
               className="absolute inset-0 -z-10 bg-center bg-cover"
-              style={{ backgroundImage: `url(${Banner})` }}
+              style={{ backgroundImage: 'url("/press1.webp")' }}
             />
             <div className="absolute inset-0 -z-10 bg-black/40" />
             <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.20),transparent_40%),radial-gradient(ellipse_at_bottom_left,rgba(255,255,255,0.12),transparent_40%)]" />
