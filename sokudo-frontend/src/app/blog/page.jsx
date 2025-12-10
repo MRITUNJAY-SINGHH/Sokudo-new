@@ -114,7 +114,7 @@ const Blog = () => {
      <section
         className="relative isolate h-[420px] flex flex-col justify-center items-center text-center transition-all duration-300"
         style={{
-          marginTop: "calc(var(--announcement-offset) ",
+          marginTop: "calc(var(--announcement-offset))",
         }}
       >
              <div

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { submitDealershipForm } from '../features/services/Services';
@@ -8,7 +10,7 @@ import { MdOutlineLocationOn } from "react-icons/md";
 import { RiBatteryChargeLine } from "react-icons/ri";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import SmartChoiceSection from '../components/SmartChoice';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from "next/navigation";
 
 /* Options */
 const qualificationOptions = [
@@ -50,7 +52,7 @@ const Dealership = () => {
    const [isSubmitting, setIsSubmitting] = useState(false);
    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-   const navigate= useNavigate();
+  const router = useRouter();
 
    const onSubmit = async (data) => {
       try {
@@ -58,7 +60,7 @@ const Dealership = () => {
          const response = await submitDealershipForm(data);
          toast.success(response.message || 'Application submitted!');
          reset();
-          navigate("/thankyou", {
+          router.push("/thankyou", {
       state: {
         formType: "Dealership",
         message: `Your Application has been submitted. Our team will contact you shortly.`,
