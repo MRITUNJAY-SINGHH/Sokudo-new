@@ -1,8 +1,7 @@
-import Footer from './components/Footer';
-import Header from './components/Header';
 import './globals.css';
 import { Providers } from './providers';
 import FloatingUI from './components/FloatingUI';
+import AppShell from './components/AppShell';
 
 export const metadata = {
    title: 'Sokudo Electric Scooters',
@@ -14,9 +13,7 @@ export default function RootLayout({ children }) {
       <html lang='en'>
          <body suppressHydrationWarning={true}>
             <Providers>
-               <Header />
-               {children}
-               <Footer />
+               <AppShell>{children}</AppShell>
             </Providers>
             <FloatingUI />
          </body>

@@ -1,14 +1,16 @@
+'use client';
+
 import { useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../features/user/UserSlice.js';
 
 export default function AuthSuccess() {
-   const [searchParams] = useSearchParams();
-   const navigate = useNavigate();
+   const router = useRouter();
    const dispatch = useDispatch();
 
    useEffect(() => {
+      const searchParams = new URLSearchParams(window.location.search);
       const token = searchParams.get('token');
       const name = searchParams.get('name');
       const email = searchParams.get('email');
@@ -31,8 +33,8 @@ export default function AuthSuccess() {
          })
       );
 
-      navigate('/account');
-   }, []);
+      router.replace('/account');
+   }, [dispatch, router]);
 
    return <div>Logging you in...</div>;
 }

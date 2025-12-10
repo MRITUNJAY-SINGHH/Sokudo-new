@@ -1,19 +1,18 @@
-"use client";
+'use client';
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
 import toast from 'react-hot-toast';
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from '../features/user/UserSlice';
 
 const Login = () => {
    const [showPassword, setShowPassword] = useState(false);
    const dispatch = useDispatch();
-   const navigate = useRouter();
+   const router = useRouter();
 
    const { loading, error, isLoggedIn } = useSelector((state) => state.user);
 
@@ -28,8 +27,8 @@ const Login = () => {
    };
 
    const handleGoogleLogin = () => {
-      const backend = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-
+      const backend =
+         process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
       window.location.href = `${backend}/customers/auth/google`;
    };
 
@@ -37,9 +36,9 @@ const Login = () => {
    useEffect(() => {
       if (isLoggedIn) {
          toast.success('Login successful 🎉');
-         navigate.push('/');
+         router.push('/');
       }
-   }, [isLoggedIn, navigate]);
+   }, [isLoggedIn, router]);
 
    // ✅ Show backend error toast
    useEffect(() => {

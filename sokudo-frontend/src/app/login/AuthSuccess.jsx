@@ -1,24 +1,26 @@
-import React, { useEffect } from "react";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { setUserAfterGoogle } from "../features/user/UserSlice";
+'use client';
+
+import React, { useEffect } from 'react';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
+import { setUserAfterGoogle } from '../features/user/UserSlice';
 
 const AuthSuccess = () => {
    const dispatch = useDispatch();
-   const navigate = useNavigate();
+   const router = useRouter();
 
    useEffect(() => {
-      const token = new URLSearchParams(window.location.search).get("token");
+      const token = new URLSearchParams(window.location.search).get('token');
 
       if (!token) {
-         navigate("/login");
+         router.replace('/login');
          return;
       }
 
       const fetchUser = async () => {
          try {
-            const backend = import.meta.env.VITE_API_URL;
+            const backend = process.env.NEXT_PUBLIC_API_URL;
 
             const res = await axios.get(`${backend}/customers/me`, {
                headers: {
@@ -33,17 +35,17 @@ const AuthSuccess = () => {
                })
             );
 
-            navigate("/");
+            router.replace('/');
          } catch (err) {
             console.log(err);
-            navigate("/login");
+            router.replace('/login');
          }
       };
 
       fetchUser();
-   }, []);
+   }, [dispatch, router]);
 
-   return <p className="text-center mt-8">Logging you in…</p>;
+   return <p className='text-center mt-8'>Logging you in…</p>;
 };
 
 export default AuthSuccess;

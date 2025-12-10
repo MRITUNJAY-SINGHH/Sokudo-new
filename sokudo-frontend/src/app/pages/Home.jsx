@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllProducts } from '../features/products/ProductSlice';
 
 import ScooterLoader from '../components/ScooterLoader';
 import Banner from '../components/Banner';
@@ -80,7 +81,20 @@ const bannerSlides = [
 
 const Home = () => {
    const [loading, setLoading] = useState(false);
-   const location = useLocation();
+   const dispatch = useDispatch();
+   const products = useSelector((state) => state.product.items);
+   const productStatus = useSelector((state) => state.product.status);
+
+   // Fetch products on mount (like you do for blogs)
+   useEffect(() => {
+      if (productStatus === 'idle' || !products || products.length === 0) {
+         dispatch(fetchAllProducts());
+      }
+   }, [dispatch, productStatus, products]);
+
+   useEffect(() => {
+      console.log('Products in Home:', products);
+   }, [products]);
 
    useEffect(() => {
       const LOADER_KEY = 'homepage_loader_time';
@@ -100,17 +114,6 @@ const Home = () => {
          return () => clearTimeout(timer);
       }
    }, []);
-
-   useEffect(() => {
-      if (location.state?.scrollTo) {
-         const el = document.getElementById(location.state.scrollTo);
-         if (el) {
-            setTimeout(() => {
-               el.scrollIntoView({ behavior: 'smooth' });
-            }, 200);
-         }
-      }
-   }, [location]);
 
    if (loading)
       return (

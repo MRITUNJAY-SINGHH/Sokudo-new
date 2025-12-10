@@ -8,7 +8,7 @@ export const fetchAllProducts = createAsyncThunk(
          const products = await getAllProducts();
          return products || [];
       } catch (error) {
-         let message = 'Failed to fetch products';
+         let message = 'Failed to fetchproducts';
          if (
             error.response &&
             error.response.data &&

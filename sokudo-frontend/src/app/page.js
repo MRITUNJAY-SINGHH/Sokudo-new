@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllProducts } from './features/products/ProductSlice';
 
 import ScooterLoader from './components/ScooterLoader';
 import Banner from './components/Banner';
@@ -77,8 +79,21 @@ const bannerSlides = [
    },
 ];
 
-export default function Home() {
+const Home = () => {
    const [loading, setLoading] = useState(false);
+   const dispatch = useDispatch();
+   const products = useSelector((state) => state.product.items);
+   const productStatus = useSelector((state) => state.product.status);
+
+   useEffect(() => {
+      if (productStatus === 'idle' || !products || products.length === 0) {
+         dispatch(fetchAllProducts());
+      }
+   }, [dispatch, productStatus, products]);
+
+   useEffect(() => {
+      console.log('Products in Home:', products);
+   }, [products]);
 
    useEffect(() => {
       const LOADER_KEY = 'homepage_loader_time';
@@ -108,26 +123,32 @@ export default function Home() {
 
    return (
       <main role='main'>
+         {/* SEO H1 (hidden visually) */}
          <h1 className='sr-only'>
             Sokudo Electric Scooters – High Speed EV Scooters in India
          </h1>
 
          <LandingPagePopup />
+
          <Banner />
          <CardCarousel />
          <ScooterCards />
 
          <ProductFeatures />
-         <ScooterBanner slides={bannerSlides} autoRotateTime={5000} />
 
+         <ScooterBanner slides={bannerSlides} autoRotateTime={5000} />
          <CityAvailabilitySection />
+
          <EmiCalculation />
          <SokudoSteps />
          <SwitchToSavings />
+
          <Revolution />
          <Video />
+
          <NewArticlesBlogs />
 
+         {/* Testimonials */}
          <section
             className='w-full page-width px-4 py-6'
             aria-labelledby='testimonials-heading'
@@ -143,8 +164,12 @@ export default function Home() {
          </section>
 
          <FAQPreview />
+
          <StoreBookingSection />
+
          <LocationFinder />
       </main>
    );
-}
+};
+
+export default Home;

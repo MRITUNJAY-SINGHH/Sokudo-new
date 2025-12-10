@@ -1,13 +1,12 @@
-"use client";
+'use client';
 import React, { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
 import { useDispatch, useSelector } from 'react-redux';
 import { userRegister } from '../features/user/UserSlice';
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
 const Signup = () => {
@@ -15,7 +14,7 @@ const Signup = () => {
    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
    const passwordRef = useRef();
    const dispatch = useDispatch();
-   const navigate = useRouter();
+   const router = useRouter();
 
    const { loading } = useSelector((state) => state.user);
 
@@ -39,15 +38,15 @@ const Signup = () => {
          ).unwrap();
 
          toast.success('Account created successfully 🎉');
-         navigate.push('/');
+         router.push('/');
       } catch (err) {
          toast.error(err || 'Registration failed. Please try again.');
       }
    };
 
    const handleGoogleSignup = () => {
-      const backend = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      // Navigates to backend which begins the Google OAuth flow
+      const backend =
+         process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
       window.location.href = `${backend}/customers/auth/google`;
    };
 
