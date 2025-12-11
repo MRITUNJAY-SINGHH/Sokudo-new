@@ -36,7 +36,7 @@ const AuthSuccess = () => {
 
             router.replace('/');
          } catch (err) {
-            console.log('Google Auth Error:', err); // Add this for debugging
+            console.log('Google Auth Error:', err);
             router.replace('/login');
          }
       };

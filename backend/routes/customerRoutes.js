@@ -8,7 +8,7 @@ import {
    sendOtpCustomer,
    getAllCustomers,
    generateToken,
-   deleteCustomer
+   deleteCustomer,
 } from '../controllers/customerController.js';
 
 const router = express.Router();
@@ -25,10 +25,13 @@ router.get(
    passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
-router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
-   res.json(req.user);
-});
-
+router.get(
+   '/me',
+   passport.authenticate('jwt', { session: false }),
+   (req, res) => {
+      res.json(req.user);
+   }
+);
 
 router.get(
    '/auth/google/callback',
@@ -40,15 +43,11 @@ router.get(
       const token = generateToken(req.user._id);
       const redirectURL = `${process.env.FRONTEND_URL}/auth/success?token=${token}&name=${req.user.name}&email=${req.user.email}&avatar=${req.user.avatar}`;
 
-    res.redirect(redirectURL);
+      res.redirect(redirectURL);
    }
 );
 
 router.get('/', getAllCustomers);
-router.delete('/:id',deleteCustomer);
-
-
-
-
+router.delete('/:id', deleteCustomer);
 
 export default router;

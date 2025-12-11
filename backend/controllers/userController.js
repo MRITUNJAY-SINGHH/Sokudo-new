@@ -2,7 +2,7 @@ import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
-import bcrypt from "bcryptjs";
+import bcrypt from 'bcryptjs';
 // Generate JWT token
 const generateToken = (id) =>
    jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '7d' });
@@ -15,7 +15,7 @@ export const registerUser = async (req, res) => {
    if (existingUser)
       return res.status(400).json({ message: 'User already exists' });
 
-   const user = await User.create({ name, email, password }); // Password will be automatically hashed by model
+   const user = await User.create({ name, email, password });
 
    res.status(201).json({
       _id: user._id,
@@ -53,7 +53,10 @@ export const forgotPassword = async (req, res) => {
 
    // Generate 6-digit OTP
    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-   user.resetPasswordToken = crypto.createHash('sha256').update(otp).digest('hex');
+   user.resetPasswordToken = crypto
+      .createHash('sha256')
+      .update(otp)
+      .digest('hex');
    user.resetPasswordExpire = Date.now() + 10 * 60 * 1000; // 10 minutes
    await user.save();
 
@@ -78,7 +81,6 @@ export const forgotPassword = async (req, res) => {
    }
 };
 
-
 //verify otp
 export const verifyOtp = async (req, res) => {
    const { email, otp } = req.body;
@@ -91,83 +93,83 @@ export const verifyOtp = async (req, res) => {
       resetPasswordExpire: { $gt: Date.now() },
    });
 
-   if (!user) return res.status(400).json({ message: 'Invalid or expired OTP' });
+   if (!user)
+      return res.status(400).json({ message: 'Invalid or expired OTP' });
 
    res.status(200).json({ message: 'OTP verified successfully' });
 };
-
-
 
 //RESET PASSWORD
 export const resetPassword = async (req, res) => {
    const { email, newPassword } = req.body;
 
-const user = await User.findOne({ email });
-if (!user) return res.status(400).json({ message: 'User not found' });
+   const user = await User.findOne({ email });
+   if (!user) return res.status(400).json({ message: 'User not found' });
 
-user.password = newPassword;
-user.resetPasswordToken = undefined;
-user.resetPasswordExpire = undefined;
+   user.password = newPassword;
+   user.resetPasswordToken = undefined;
+   user.resetPasswordExpire = undefined;
 
-await user.save();
+   await user.save();
 
-res.status(200).json({ message: 'Password reset successfully' });
-
+   res.status(200).json({ message: 'Password reset successfully' });
 };
-
-
 
 export const getUserProfile = async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id).select("-password");
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    res.status(200).json(user);
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
+   try {
+      const user = await User.findById(req.user.id).select('-password');
+      if (!user) {
+         return res.status(404).json({ message: 'User not found' });
+      }
+      res.status(200).json(user);
+   } catch (error) {
+      res.status(500).json({ message: 'Server error', error: error.message });
+   }
 };
-
 
 export const updateUserProfile = async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id);
-    if (!user) return res.status(404).json({ message: "User not found" });
+   try {
+      const user = await User.findById(req.user.id);
+      if (!user) return res.status(404).json({ message: 'User not found' });
 
-    user.name = req.body.name || user.name;
-    await user.save();
+      user.name = req.body.name || user.name;
+      await user.save();
 
-    res.status(200).json({
-      message: "Profile updated successfully",
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-      },
-    });
-  } catch (error) {
-    res.status(500).json({ message: "Error updating profile", error: error.message });
-  }
+      res.status(200).json({
+         message: 'Profile updated successfully',
+         user: {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+         },
+      });
+   } catch (error) {
+      res.status(500).json({
+         message: 'Error updating profile',
+         error: error.message,
+      });
+   }
 };
 
-
-
 export const changePassword = async (req, res) => {
-  try {
-    const { oldPassword, newPassword } = req.body;
+   try {
+      const { oldPassword, newPassword } = req.body;
 
-    const user = await User.findById(req.user.id);
-    if (!user) return res.status(404).json({ message: "User not found" });
+      const user = await User.findById(req.user.id);
+      if (!user) return res.status(404).json({ message: 'User not found' });
 
-    const isMatch = await bcrypt.compare(oldPassword, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Incorrect old password" });
+      const isMatch = await bcrypt.compare(oldPassword, user.password);
+      if (!isMatch)
+         return res.status(400).json({ message: 'Incorrect old password' });
 
-    user.password = newPassword; // automatically hashed by pre-save hook
-    await user.save();
+      user.password = newPassword; // automatically hashed by pre-save hook
+      await user.save();
 
-    res.status(200).json({ message: "Password changed successfully" });
-  } catch (error) {
-    res.status(500).json({ message: "Error changing password", error: error.message });
-  }
+      res.status(200).json({ message: 'Password changed successfully' });
+   } catch (error) {
+      res.status(500).json({
+         message: 'Error changing password',
+         error: error.message,
+      });
+   }
 };
